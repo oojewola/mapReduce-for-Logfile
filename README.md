@@ -2,7 +2,7 @@
 
 This repo contains two Hadoop MapReduce programs that run on a 3-node clusters on Google Cloud. The programs are used to process a log file, which is read into lines of **IP Address, Time, Type of HTTP Request, Requested File, HTTP Version and Status, etc**.  
 
-<img src="data/data.png" width="500">
+<img src="pic/data.png" width="500">
 
 ## Part I: Top-3 IP address
 
@@ -32,7 +32,7 @@ Next, using python container `defaultdict`, the program maps the value `[ip, cou
 
 Finally, the program iteratively sort the count within 24 hours, and extracted the top 3-IP addresses with their counts. 
 
-<img src="data/part1.png" width="500">
+<img src="pic/part1.png" width="500">
 
 
 ## Part II: A database search
@@ -62,7 +62,7 @@ Here, the two parameters being passes are **3** and **6**, which means I'd like 
 
 For the mapper `mapper.py`, it read the input lines into a list of lists. For each list of lists, I used list comprehension to filter by the two hour parameters that were given. Then, the subset list is sorted and the top-3 IP addresses are extracted. 
 
-<img src="data/part2.png" width="500">
+<img src="pic/part2.png" width="500">
 
 
 
