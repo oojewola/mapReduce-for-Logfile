@@ -16,11 +16,15 @@ This program runs two rounds of mapreduce.
 
 2. In the 2nd round, only the mapper is used. The result of the 1st round mapreduce will be the input of the mapper with following command: 
 
-    <br> `/usr/local/hadoop/bin/hdfs dfs -cp /logstat2/output/part-00000 /logstat3/input/`. </br>
+```bash
+/usr/local/hadoop/bin/hdfs dfs -cp /logstat2/output/part-00000 /logstat3/input/
+```
 
 Next, specify only the mapper and no reducer is used with:
 
-    <br> `-D mapred.reduce.tasks=0`.</br>
+```bash
+-D mapred.reduce.tasks=0
+```
 
 For the mapper program, the input lines are grouped by hours. Then it outputs the top-3 IP addresses for each hour (within the 24 hour range). 
 
@@ -46,17 +50,22 @@ This program also runs two rounds of mapreduce. It takes two paramters between 0
  In the 1st round, the program is built on top of *logstat2*. It takes the access.log file and output the count of each IP addresses within each hour. The result is saved in `/logstat2/output/`. 
 
 In the 2nd round, only mapper is used. First, in the `test.sh` file, The result of first round mapreduce will be the input of the mapper: 
-    
-    <br> `/usr/local/hadoop/bin/hdfs dfs -cp /logstat2/output/part-00000 /logstat3/input/`</br>
+
+```bash
+/usr/local/hadoop/bin/hdfs dfs -cp /logstat2/output/part-00000 /logstat3/input/
+```
 
 Then, specify only mapper and no reducer is used with: 
 
-    <br> `-D mapred.reduce.tasks=0`.</br> 
+```bash
+-D mapred.reduce.tasks=0
+```
 
 Next, the mapper takes two parameters of two integer value between 0-24:
 
-    <br>`-mapper '../../mapreduce-test-python/logstat4/mapper.py 3 6'`</br>
-
+```bash
+-mapper '../../mapreduce-test-python/logstat4/mapper.py 3 6'
+```
 Here, the two parameters being passes are **3** and **6**, which means I'd like to output the top-3 IP addresses between 3 to 6 am. 
 (p.s. the two paramters are read in as string, but converted into integer in the mapper)
 
